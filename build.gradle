@@ -8,7 +8,8 @@ buildscript {
 		maven { url "https://repo.spring.io/milestone" }
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
+		//classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
@@ -28,6 +29,7 @@ repositories {
 
 
 dependencies {
+	compile('io.jsonwebtoken:jjwt:0.6.0')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
