@@ -1,5 +1,6 @@
 package com.eci.cosw.springbootsecureapi.controller;
 
+import com.eci.cosw.springbootsecureapi.model.Todo;
 import com.eci.cosw.springbootsecureapi.model.User;
 import com.eci.cosw.springbootsecureapi.service.UserService;
 import io.jsonwebtoken.Jwts;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Santiago Carrillo
@@ -55,6 +57,18 @@ public class UserController
             SignatureAlgorithm.HS256, "secretkey" ).compact();
 
         return new Token( jwtToken );
+    }
+
+    @CrossOrigin
+    @RequestMapping( value = "/items", method = RequestMethod.GET )
+    public List<User> getUsers(){
+        return userService.getUsers();
+    }
+
+    @CrossOrigin
+    @RequestMapping( value = "/items", method = RequestMethod.POST )
+    public User usuarioNuevo(@RequestBody User user){
+        return userService.createUser(user);
     }
 
     public class Token
