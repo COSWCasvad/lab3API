@@ -72,7 +72,11 @@ public class UserServiceImpl
     @Override
     public User findUserByEmail( String email )
     {
-        return users.get( 0 );
+        User ans=null;
+        for (int i =0;i<users.size();i++){
+            if(users.get(i).getEmail().equals(email)) ans=users.get(i);
+        }
+        return ans;
     }
 
     @Override

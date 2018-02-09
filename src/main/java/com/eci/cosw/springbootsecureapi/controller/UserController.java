@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.ServletException;
 import java.util.Date;
@@ -72,6 +73,14 @@ public class UserController
             return userService.createUser(user);
 
     }
+
+    @CrossOrigin
+    @RequestMapping( value = "/byEmail/{email}", method = RequestMethod.GET )
+    public User userByEmail(@PathVariable  String email){
+        return userService.findUserByEmail(email);
+    }
+
+
 
     public class Token
     {
