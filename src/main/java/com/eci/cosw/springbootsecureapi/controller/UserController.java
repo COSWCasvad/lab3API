@@ -6,8 +6,10 @@ import com.eci.cosw.springbootsecureapi.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
 
 import javax.servlet.ServletException;
 import java.util.Date;
@@ -27,14 +29,15 @@ public class UserController
 
     @CrossOrigin
     @RequestMapping( value = "/login", method = RequestMethod.POST )
-    public Token login( @RequestBody User login )
-        throws ServletException
+    public ResponseEntity<?> login( @RequestBody User login )
+
     {
         String jwtToken = "";
 
         if ( login.getUsername() == null || login.getPassword() == null )
         {
-            throw new ServletException( "Please fill in username and password" );
+            //throw new ServletException( "Please fill in username and password" );
+            return new ResponseEntity<>("Please fill in username and password",HttpStatus.FORBIDDEN);
         }
 
         String username = login.getUsername();
@@ -44,20 +47,22 @@ public class UserController
 
         if ( user == null )
         {
-            throw new ServletException( "User username not found." );
+            //throw new ServletException( "User username not found." );
+            return new ResponseEntity<>("User username not found." ,HttpStatus.FORBIDDEN);
         }
 
         String pwd = user.getPassword();
 
         if ( !password.equals( pwd ) )
         {
-            throw new ServletException( "Invalid login. Please check your name and password." );
+            //throw new ServletException( "Invalid login. Please check your name and password." );
+            return new ResponseEntity<>("Invalid login. Please check your name and password." ,HttpStatus.FORBIDDEN);
         }
 
         jwtToken = Jwts.builder().setSubject( username ).claim( "roles", "user" ).setIssuedAt( new Date() ).signWith(
             SignatureAlgorithm.HS256, "secretkey" ).compact();
 
-        return new Token( jwtToken );
+        return new ResponseEntity<>(new Token( jwtToken ),HttpStatus.ACCEPTED);
     }
 
     @CrossOrigin
@@ -68,16 +73,25 @@ public class UserController
 
     @CrossOrigin
     @RequestMapping( value = "/items", method = RequestMethod.POST )
-    public User usuarioNuevo(@RequestBody User user) throws ServletException {
-
-            return userService.createUser(user);
+    public ResponseEntity<?>  usuarioNuevo(@RequestBody User user) {
+            try{
+                return new ResponseEntity<>(userService.createUser(user),HttpStatus.ACCEPTED);
+            }
+            catch (ServletException e){
+                return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
+            }
 
     }
 
     @CrossOrigin
-    @RequestMapping( value = "/byEmail/{email}", method = RequestMethod.GET )
-    public User userByEmail(@PathVariable  String email){
-        return userService.findUserByEmail(email);
+    @RequestMapping( value = "/byEmail/{email}.{dominio}", method = RequestMethod.GET )
+    public ResponseEntity<?>  userByEmail(@PathVariable  String email,@PathVariable  String dominio){
+
+        try{
+            return new ResponseEntity<>(userService.findUserByEmail(email+"."+dominio),HttpStatus.ACCEPTED);
+        }catch(ServletException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
     }
 
 

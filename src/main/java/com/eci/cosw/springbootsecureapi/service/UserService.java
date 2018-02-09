@@ -17,7 +17,7 @@ public interface UserService
 
     User createUser( User user ) throws ServletException;
 
-    User findUserByEmail( String email );
+    User findUserByEmail( String email ) throws ServletException;
 
     User findUserByEmailAndPassword( String email, String password );
 }

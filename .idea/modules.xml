@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab2.iml" filepath="$PROJECT_DIR$/.idea/modules/lab2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab2_main.iml" group="lab2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab2_test.iml" group="lab2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab3API.iml" filepath="$PROJECT_DIR$/.idea/modules/lab3API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab3API_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab3API_main.iml" group="lab3API" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab3API_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab3API_test.iml" group="lab3API" />
     </modules>
   </component>
 </project>

@@ -70,12 +70,15 @@ public class UserServiceImpl
     }
 
     @Override
-    public User findUserByEmail( String email )
+    public User findUserByEmail( String email ) throws ServletException
     {
         User ans=null;
+
         for (int i =0;i<users.size();i++){
+
             if(users.get(i).getEmail().equals(email)) ans=users.get(i);
         }
+        if (ans==null)throw new ServletException ("no hay usuario con ese email");
         return ans;
     }
 

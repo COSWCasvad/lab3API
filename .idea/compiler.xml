@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="lab2_main" target="1.8" />
       <module name="lab2_test" target="1.8" />
+      <module name="lab3API_main" target="1.8" />
+      <module name="lab3API_test" target="1.8" />
       <module name="spring-boot-secure-api_main" target="1.8" />
       <module name="spring-boot-secure-api_test" target="1.8" />
     </bytecodeTargetLevel>
