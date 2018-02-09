@@ -2,6 +2,7 @@ package com.eci.cosw.springbootsecureapi.service;
 
 import com.eci.cosw.springbootsecureapi.model.User;
 
+import javax.servlet.ServletException;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public interface UserService
 
     User getUser( String username );
 
-    User createUser( User user ) throws Exception;
+    User createUser( User user ) throws ServletException;
 
     User findUserByEmail( String email );
 

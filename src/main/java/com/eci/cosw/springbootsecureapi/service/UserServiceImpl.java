@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,18 +52,18 @@ public class UserServiceImpl
     }
 
     @Override
-    public User createUser( User user ) throws Exception
+    public User createUser( User user ) throws ServletException
     {
         if(yaEstaRegistrado(user.getUsername())){
-            throw new Exception("El usuario ya se encuentra registrado con dicho username");
+            throw new ServletException("El username ya se encuentra registrado en la base de datos");
         }
         users.add(user);
         return user;
     }
 
     private boolean yaEstaRegistrado(String username) {
-        boolean ans = true;
-        for (int i =0;i<users.size() && ans ;i++){
+        boolean ans = false;
+        for (int i =0;i<users.size() && !ans ;i++){
             ans=users.get(i).getUsername().equals(username);
         }
         return ans;

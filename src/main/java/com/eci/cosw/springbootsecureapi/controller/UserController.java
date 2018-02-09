@@ -68,11 +68,9 @@ public class UserController
     @CrossOrigin
     @RequestMapping( value = "/items", method = RequestMethod.POST )
     public User usuarioNuevo(@RequestBody User user) throws ServletException {
-        try {
+
             return userService.createUser(user);
-        } catch (Exception e) {
-            throw new ServletException (e.getMessage());
-        }
+
     }
 
     public class Token
