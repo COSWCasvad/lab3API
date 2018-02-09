@@ -28,7 +28,7 @@ public class UserServiceImpl
     @PostConstruct
     private void populateSampleData()
     {
-        users.add( new User( "test@mail.com", "password", "Andres", "Perez", "https://ams.educause.edu/eweb/upload/60283746.jpg" ) );
+        users.add( new User( "xyz","test@mail.com", "password", "Andres", "Perez", "https://ams.educause.edu/eweb/upload/60283746.jpg" ) );
     }
 
 
@@ -39,16 +39,33 @@ public class UserServiceImpl
     }
 
     @Override
-    public User getUser( Long id )
+    public User getUser( String username )
     {
-        return users.get(Integer.parseInt(Long.toString(id)));
+        User ans = null;
+        for (int i =0;i<users.size() ;i++){
+            if(users.get(i).getUsername().equals(username)){
+                ans=users.get(i);
+            }
+        }
+        return ans;
     }
 
     @Override
-    public User createUser( User user )
+    public User createUser( User user ) throws Exception
     {
+        if(yaEstaRegistrado(user.getUsername())){
+            throw new Exception("El usuario ya se encuentra registrado con dicho username");
+        }
         users.add(user);
         return user;
+    }
+
+    private boolean yaEstaRegistrado(String username) {
+        boolean ans = true;
+        for (int i =0;i<users.size() && ans ;i++){
+            ans=users.get(i).getUsername().equals(username);
+        }
+        return ans;
     }
 
     @Override
